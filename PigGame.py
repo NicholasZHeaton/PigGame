@@ -16,7 +16,6 @@ import random
 
 
 # roll_dice() provides two separate dice, rolling random numbers between 1 and 6 whenever the function is called on.
-
 def roll_dice():
     dice1 = random.randint(1, 6)
     dice2 = random.randint(1, 6)
@@ -25,6 +24,7 @@ def roll_dice():
 
 def computer_turn(game_score, goal):
     turn_total = 0
+
     # while the turn_total is less than the goal total then the loop will continue until you roll both dice as 1's
     # setting game_score to 0. If that passes then it checks for a single occurrence of 1 in the dice, setting the
     # current score to 0. If no 1's are present then the dice totals are added up and printed.
@@ -43,6 +43,8 @@ def computer_turn(game_score, goal):
 def human_turn(game_score):
     turn_total = 0
     roll_again = "y"
+
+    # While the user inputs y for roll again this loop will continue to repeat. otherwise input n to end the loop.
     while "y" == roll_again:
         human_roll = roll_dice()
         if human_roll.count(1) == 2:
@@ -96,25 +98,25 @@ def world_championship(games, goal_1, goal_2):
     game_total = games
     totes_not_robot = 0
     swear_im_human = 0
-    computer1_wins = 0
-    computer2_wins = 0
+    totes_not_robot_wins = 0
+    swear_im_human_wins = 0
     while game_total != 0:
         if totes_not_robot > 100:
-            computer1_wins += 1
+            totes_not_robot_wins += 1
             game_total -= 1
             print("totes_not_robot:", totes_not_robot, "swear_im_human:", swear_im_human)
             swear_im_human -= swear_im_human
             totes_not_robot -= totes_not_robot
         elif swear_im_human > 100:
-            computer2_wins += 1
+            swear_im_human_wins += 1
             game_total -= 1
             print("totes_not_robot:", totes_not_robot, "swear_im_human:", swear_im_human)
             swear_im_human -= swear_im_human
             totes_not_robot -= totes_not_robot
         totes_not_robot = computer_turn(totes_not_robot, goal_1)
         swear_im_human = computer_turn(swear_im_human, goal_2)
-    print("totes_not_robot:", computer1_wins, "Wins", "swear_im_human:", computer2_wins, "Wins")
-    return computer1_wins, computer2_wins
+    print("totes_not_robot:", totes_not_robot_wins, "Wins", "swear_im_human:", swear_im_human_wins, "Wins")
+    return totes_not_robot_wins, swear_im_human_wins
 
 
 if __name__ == '__main__':
